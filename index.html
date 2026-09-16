@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="teletext">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perttilahti — software project manager & indie iOS developer</title>
+<meta name="description" content="Ville Perttilahti. Software project manager at Sweco Finland and founder of Will·e, one of the most popular learning apps for comprehensive school students in Finland.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<script>
+/* =====================================================================
+   MUOKKAA TÄSTÄ — kaikki sivun tekstit ovat tässä lohkossa.
+   Alempana olevaan HTML:ään ja CSS:ään ei tarvitse koskea.
+
+   Säännöt:
+   - Teksti kirjoitetaan lainausmerkkien " " sisään.
+   - Jos tekstissä on lainausmerkki, kirjoita se muodossa \"
+   - Listan alkiot erotetaan pilkulla. Ylimääräinen pilkku lopussa ei haittaa.
+   - Rivin poistaminen = koko rivin (tai { } -lohkon) poisto.
+   - Apin status: "shipped" | "coming" | "wip"
+   - "20??" = vuosi jota en tiennyt, täytä oikea.
+   ===================================================================== */
+var CONTENT = {
+
+  name:     "Perttilahti",
+  fullName: "",   /* jätä tyhjäksi = ei näytetä; nimi tulee jo prompt-riviltä ja otsikosta */
+  tagline:  "software project manager & indie iOS developer",
+  updated:  "2026-09",
+
+  /* ---------- ABOUT: kappaleet, yksi per rivi ---------- */
+  about: [
+    "I lead software projects by day and ship iOS products on my own time. The common thread is ownership of the whole chain: from an unclear need to a written specification, to a working product, to people actually using it.",
+    "At Sweco Finland I work as a project manager in software development. I run the projects end to end: I write the specifications, steer delivery with the development teams, and own the rollout and adoption so that what gets built gets used.",
+    "Alongside that I founded and built Will·e, one of the most popular learning apps for comprehensive school students in Finland. I did it alone from a blank page: product, UX, SwiftUI app, backend, subscriptions, App Store and marketing. AI was a force multiplier throughout, not a shortcut around understanding the work."
+  ],
+
+  /* ---------- pienet faktat about-osion alla ---------- */
+  facts: [
+    ["role",     "Project Manager, Software Development at Sweco Finland"],
+    ["side",     "Founder and sole developer of Will·e"],
+    ["location", "Finland"],
+    ["status",   "building"]
+  ],
+
+  /* ---------- STORY: cv-tyylinen aikajana, uusin ylimpänä ----------
+     year voi olla myös "2024–2026" tai "autumn 2026" */
+  story: [
+    {
+      year:  "2026",
+      title: "Will·e goes international",
+      text:  "Launched in Sweden, the US, the UK and Canada with per-storefront ASO, localized onboarding and an App Store featuring nomination. Still a one-person operation."
+    },
+    {
+      year:  "2026",
+      title: "Will·e reaches the top of its category in Finland",
+      text:  "Took it from idea to the top of its category alone: product design, SwiftUI, Supabase backend, subscriptions with RevenueCat, launch marketing and ongoing releases."
+    },
+    {
+      year:  "2023",
+      title: "Started building, not just specifying",
+      text:  "Learned to code with AI in the loop: Python and APIs first, then SwiftUI. The goal was to understand every layer well enough to specify it, build it and defend the decisions."
+    },
+    {
+      year:  "2015 – present",
+      title: "Project manager at Sweco Finland",
+      text:  "Leading software development projects: requirements and specification, delivery management, rollout and adoption across the organisation."
+    }
+  ],
+
+  /* ---------- SKILLS: ryhmät ja niiden alkiot ---------- */
+  skills: [
+    {
+      group: "product and delivery",
+      items: [
+        { name: "Software project management", note: "scope, schedule, budget, risk; steering delivery teams" },
+        { name: "Requirements and specification", note: "turning vague needs into buildable specs" },
+        { name: "Rollout and adoption",          note: "deployment, training, change management, user support" },
+        { name: "Product ownership",             note: "roadmap, prioritisation, release management" },
+        { name: "Stakeholder communication",     note: "business and technical audiences, in Finnish and English" },
+        { name: "App Store and ASO",              note: "submissions, review, keywords, launch marketing" }
+      ]
+    },
+    {
+      group: "engineering",
+      items: [
+        { name: "Swift / SwiftUI",               note: "iOS 17+, SwiftData, widgets, extensions" },
+        { name: "Supabase",                      note: "Postgres, RLS, Edge Functions, Realtime" },
+        { name: "StoreKit 2 / RevenueCat",       note: "subscriptions and one-time purchases" },
+        { name: "AI-native development",         note: "Claude and Gemini APIs; AI-assisted workflow from spec to code" },
+        { name: "Python",                        note: "automation, data pipelines, APIs" },
+        { name: "C# / .NET",                     note: "Tekla Open API plugin tooling" },
+        { name: "Cloudflare Workers, GitHub",    note: "deep links, lightweight backends, static hosting" }
+      ]
+    }
+  ],
+
+  /* ---------- APPS ----------
+     status: "shipped" | "coming" | "wip"
+     label:  pieni teksti nimen perässä (versio, "in review", tms.), voi olla ""
+     detail: valinnainen tekninen lohko kuvauksen alle. Joko yksi teksti "..."
+             (näytetään otsikolla "how it works") tai lista [ ["otsikko", "teksti"], ... ]
+             jolloin jokainen rivi saa oman otsikkonsa. Jätä pois jos ei tarvita.
+     links:  [ ["text", "https://..."], ... ]  – tyhjä lista [] jos ei linkkejä */
+  apps: [
+    {
+      name:   "Will·e",
+      status: "shipped",
+      label:  "",
+      desc:   "AI turns the student's own study material into practice questions. One of the most popular learning apps for grades 1–9 in Finland, now also in SE/US/UK/CA. Subscription business, built and run solo.",
+      tags:   "swiftui supabase revenuecat gemini",
+      detail: [
+        ["scope",      "One person from first line of code to App Store: SwiftUI app with three system extensions, Supabase backend (Postgres, row-level security, Edge Functions, cron), RevenueCat subscriptions, APNs push and Live Activities, Screen Time API for the App Lock feature. Over a hundred sprints, each documented with what was measured and what was decided."],
+        ["security",   "Every user gets an anonymous auth identity and a JWT; Sign in with Apple is an optional link, not a requirement. Row-level security on every table. The AI proxy validates the session, enforces the subscription server-side and rate-limits per user. Found during review that a client-only paywall could be bypassed with curl, and closed it before launch."],
+        ["economics",  "Measured token cost per generation instead of estimating it. The first real number was double the model; rewrote the prompts (cost halved, quality up), then moved generation to a cheaper model at roughly a tenth of the cost. Break-even moved from about 250 to about 2 500 generations per subscriber per month. Cost circuit breakers per user on the server."],
+        ["compliance", "Built for children from day one: parental consent flow under GDPR-K, COPPA and PIPEDA, DPIA, privacy manifest, photos never stored on servers, chat history on-device only. Passed App Review after rejections on subscription disclosure and account deletion, each fixed in a day."],
+        ["reach",      "Localised in Finnish, English and Swedish (570+ strings), per-storefront ASO for five App Store fronts, friend challenges free forever as the growth loop."]
+      ],
+      links: [
+        ["app store", "https://apps.apple.com/app/id6776587160"],
+        ["web",       "https://will-e.app"]
+      ]
+    },
+    {
+      name:   "UNSEEN",
+      status: "coming",
+      label:  "iOS done, Android next",
+      desc:   "Privacy tool for a world of always-on cameras. Recognises Ray-Ban Meta and Oakley Meta glasses from their Bluetooth LE advertisements, alerts you with a notification, and points you toward them on a radar. Low-power background scanning, no account, nothing leaves the phone. Android port with the same detection logic in progress.",
+      tags:   "swift corebluetooth metal kotlin",
+      detail: "Direction finding with no direction data in BLE: the human body attenuates 2.4 GHz by 10–20 dB, so signal strength peaks when the glasses are in front of you and dips when they are behind. In radar mode the app scans continuously, logs every advertisement (Meta sends about 4 per second) against the compass heading, and computes a weighted circular mean. A blip is drawn only once a bearing has actually been measured; until then the device shows as a ring at the right distance with a prompt to turn slowly. Accuracy is roughly ±30–45°, but it is a real measurement, not decoration.",
+      links:  []
+    },
+    {
+      name:   "JUONI",
+      status: "wip",
+      label:  "",
+      desc:   "Murder logic puzzle game with multilingual cases and co-op play. Every murder has a JUONI.",
+      tags:   "swiftui swiftdata supabase",
+      links:  []
+    },
+    {
+      name:   "Limitti",
+      status: "wip",
+      label:  "",
+      desc:   "Claude usage limits as a gauge in an iPhone and Apple Watch widget.",
+      tags:   "swiftui widgetkit watchos",
+      links:  []
+    },
+    {
+      name:   "SoundBoard",
+      status: "wip",
+      label:  "",
+      desc:   "Keyboard extension for sending meme sounds and GIFs straight from messaging apps.",
+      tags:   "swiftui uikit avfoundation imessage",
+      links:  []
+    },
+    {
+      name:   "Oma Polku",
+      status: "wip",
+      label:  "",
+      desc:   "For parents on alternating custody weeks: capture ideas alone, make memories together.",
+      tags:   "swiftui coredata",
+      links:  []
+    }
+  ],
+
+  /* ---------- CONTACT: [ "label", "shown text", "link" ] ---------- */
+  contact: [
+    ["linkedin", "linkedin.com/in/villeperttilahti", "https://www.linkedin.com/in/villeperttilahti"],
+    ["email",    "ville@will-e.app",                 "mailto:ville@will-e.app"],
+    ["github",   "github.com/VillePerttilahti",      "https://github.com/VillePerttilahti"]
+  ]
+};
+/* ===================== MUOKATTAVA OSA PÄÄTTYY ===================== */
+</script>
+
+<style>
+  :root {
+    --bg: #000; --fg: #d9e6d9; --dim: #6f7f6f; --line: #23302a;
+    --c1: #7dff6a; --c2: #5ce6ff; --c3: #ffe45c; --c4: #ff6ad5; --c5: #ffa24a;
+    --sel: rgba(125,255,106,.18);
+  }
+  :root[data-theme="green"] {
+    --fg: #b6f7a8; --dim: #4f8a48; --line: #123a10;
+    --c1: #7dff6a; --c2: #7dff6a; --c3: #7dff6a; --c4: #b6f7a8; --c5: #7dff6a;
+  }
+  :root[data-theme="amber"] {
+    --fg: #f3d6a0; --dim: #8a6f3f; --line: #3a2a10;
+    --c1: #ffb000; --c2: #ffb000; --c3: #ffd36a; --c4: #f3d6a0; --c5: #ffb000;
+    --sel: rgba(255,176,0,.18);
+  }
+
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh;
+  }
+  ::selection { background: var(--sel); }
+  a { color: var(--c2); text-decoration: none; }
+  a:hover, a:focus-visible { text-decoration: underline; text-underline-offset: 3px; outline: none; }
+  a:focus-visible { outline: 1px solid var(--c2); outline-offset: 2px; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 64px; position: relative; z-index: 1; }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px);
+  }
+
+  nav.tabs {
+    display: flex; justify-content: space-between; border-bottom: 1px solid var(--c3);
+    padding: 16px 0 6px; margin-bottom: 20px;
+  }
+  nav.tabs a { color: var(--dim); padding: 0 4px; }
+  nav.tabs a[aria-current="true"] { color: var(--c1); border-bottom: 2px solid var(--c1); margin-bottom: -7px; padding-bottom: 6px; }
+  nav.tabs a:hover { text-decoration: none; color: var(--fg); }
+
+  .prompt { color: var(--dim); margin: 0; white-space: nowrap; overflow: hidden; }
+  .prompt .user { color: var(--c1); }
+  .prompt .pro, .prompt .host { color: var(--c4); }
+  .prompt .cmd { color: var(--fg); }
+  .comment { color: var(--dim); }
+  .cursor { display: inline-block; width: .6em; height: 1.1em; background: var(--c1); vertical-align: -.15em; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  header.hero { text-align: center; padding: 28px 0 8px; }
+  header.hero .prompt { text-align: left; }
+  h1 {
+    font-size: clamp(38px, 11vw, 88px); font-weight: 700; letter-spacing: -.02em; line-height: 1;
+    margin: 18px 0 10px; color: var(--c1);
+    text-shadow: 0 0 18px color-mix(in srgb, var(--c1) 55%, transparent);
+  }
+  h1 .cursor { margin-left: .08em; height: .9em; width: .45em; vertical-align: -.02em; }
+  .tagline { margin: 0 0 6px; }
+  .tagline .comment { display: block; }
+  .themes { margin: 22px 0 0; color: var(--dim); font-size: 13px; }
+  .themes button { font: inherit; color: var(--dim); background: none; border: 0; padding: 0 4px; cursor: pointer; }
+  .themes button[aria-pressed="true"] { color: var(--c3); }
+  .themes button:hover { color: var(--fg); }
+
+  section { margin-top: 44px; scroll-margin-top: 16px; }
+  section > h2 { font-size: 15px; font-weight: 700; color: var(--c3); margin: 0 0 4px; }
+  section > h2::before { content: "$ "; color: var(--c1); font-weight: 400; }
+  section > .comment { margin: 0 0 14px; }
+
+  .about p { margin: 0 0 12px; max-width: 64ch; }
+  .kv { display: grid; grid-template-columns: max-content 1fr; gap: 2px 14px; margin: 16px 0 0; }
+  .kv dt { color: var(--dim); margin: 0; }
+  .kv dd { margin: 0; }
+  .kv dd .dot { color: var(--c1); }
+
+  .story { list-style: none; padding: 0; margin: 0; border-left: 1px solid var(--line); }
+  .story li { position: relative; padding: 0 0 22px 22px; }
+  .story li:last-child { padding-bottom: 4px; }
+  .story li::before {
+    content: ""; position: absolute; left: -4px; top: .55em; width: 7px; height: 7px;
+    background: var(--bg); border: 1px solid var(--c4);
+  }
+  .story li:first-child::before { background: var(--c4); }
+  .story .year { color: var(--c4); font-size: 13px; }
+  .story .head { font-weight: 700; display: block; max-width: 62ch; }
+  .story p { margin: 2px 0 0; max-width: 62ch; }
+  .story p::before { content: "// "; color: var(--dim); }
+
+  .group { margin-top: 14px; }
+  .group:first-child { margin-top: 0; }
+  .group .glabel { color: var(--c4); margin: 0 0 6px; }
+  .group .glabel::before { content: "# "; color: var(--dim); }
+  .skills { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
+  .skills li { color: var(--c2); }
+  .skills li::before { content: "- "; color: var(--dim); }
+  .skills li small { color: var(--dim); display: block; padding-left: 2ch; font-size: 13px; }
+
+  .apps { list-style: none; padding: 0; margin: 0; }
+  .app { padding: 12px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 4ch 1fr; gap: 0 4px; }
+  .app:last-child { border-bottom: 1px solid var(--line); }
+  .app .chk { color: var(--c1); }
+  .app.coming .chk { color: var(--c4); }
+  .app.wip .chk { color: var(--dim); }
+  .app .name { font-weight: 700; color: var(--fg); }
+  .app .name a { color: inherit; }
+  .app .state { color: var(--c4); font-size: 13px; margin-left: 1ch; }
+  .app .desc { color: var(--dim); }
+  .app .desc::before { content: "// "; }
+  .app .details { margin: 8px 0 2px; }
+  .app .detail { margin: 0 0 6px; font-size: 13px; line-height: 1.55; max-width: 64ch; color: var(--fg); }
+  .app .detail::before { content: "// "; color: var(--dim); }
+  .app .detail .dl { color: var(--c4); }
+  .app .meta { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 4px; font-size: 13px; }
+  .app .tags { color: var(--dim); }
+  .app .links a { margin-right: 6px; }
+  .app .links a::before { content: "["; color: var(--dim); }
+  .app .links a::after { content: "]"; color: var(--dim); }
+
+  .contact { list-style: none; padding: 0; margin: 0; }
+  .contact li { display: grid; grid-template-columns: 9ch 1fr; gap: 10px; }
+  .contact li span:first-child { color: var(--dim); }
+
+  footer { margin-top: 56px; color: var(--dim); font-size: 13px; }
+  footer p { margin: 4px 0; }
+
+  @media (max-width: 480px) {
+    body { font-size: 14px; }
+    .skills { grid-template-columns: 1fr; }
+    nav.tabs a { padding: 0 2px; font-size: 13px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="tabs" aria-label="Sections">
+    <a href="#about" aria-current="true">about</a>
+    <a href="#story">story</a>
+    <a href="#skills">skills</a>
+    <a href="#apps">apps</a>
+    <a href="#contact">contact</a>
+  </nav>
+
+  <header class="hero">
+    <p class="prompt"><span class="user">ville</span><span class="pro">[pm]</span>@<span class="host">perttilahti</span> ~ $ <span class="cmd" id="typed"></span></p>
+    <h1><span id="name"></span><span class="cursor" aria-hidden="true"></span></h1>
+    <p class="tagline"><span id="fullname"></span><span class="comment" id="tagline"></span></p>
+    <p class="themes">theme:
+      <button type="button" data-theme="teletext" aria-pressed="true">[teletext]</button>
+      <button type="button" data-theme="green">[green]</button>
+      <button type="button" data-theme="amber">[amber]</button>
+    </p>
+  </header>
+
+  <section id="about" class="about">
+    <h2>cat about.txt</h2>
+    <p class="comment">// who I am and what I do</p>
+    <div id="about-body"></div>
+    <dl class="kv" id="facts"></dl>
+  </section>
+
+  <section id="story">
+    <h2>git log --oneline story</h2>
+    <p class="comment">// career in commits, newest first</p>
+    <ol class="story" id="story-list"></ol>
+  </section>
+
+  <section id="skills">
+    <h2>ls skills/</h2>
+    <p class="comment">// what I bring to a project</p>
+    <div id="skills-groups"></div>
+  </section>
+
+  <section id="apps">
+    <h2>ls apps/</h2>
+    <p class="comment">// [✓] shipped &nbsp;[~] coming &nbsp;[ ] in progress</p>
+    <ul class="apps" id="apps-list"></ul>
+  </section>
+
+  <section id="contact">
+    <h2>cat contact.txt</h2>
+    <p class="comment">// easiest ways to reach me</p>
+    <ul class="contact" id="contact-list"></ul>
+  </section>
+
+  <footer>
+    <p class="prompt"><span class="user">ville</span><span class="pro">[pm]</span>@<span class="host">perttilahti</span> ~ $ <span class="cmd">exit</span></p>
+    <p>// updated <span id="updated"></span></p>
+  </footer>
+
+</div>
+
+<script>
+/* ---- Sivun rakentaminen CONTENT-lohkosta. Tähän ei tarvitse koskea. ---- */
+(function () {
+  var C = CONTENT;
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function link(text, href) {
+    var a = el('a', null, text); a.href = href;
+    if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; }
+    return a;
+  }
+  function $(id) { return document.getElementById(id); }
+
+  document.title = C.name + ' — ' + C.tagline;
+  $('name').textContent = C.name;
+  $('fullname').textContent = C.fullName;
+  if (!C.fullName) $('fullname').style.display = 'none';
+  $('tagline').textContent = '// ' + C.tagline;
+  $('updated').textContent = C.updated;
+
+  C.about.forEach(function (t) { $('about-body').appendChild(el('p', null, t)); });
+  C.facts.forEach(function (f) {
+    $('facts').appendChild(el('dt', null, f[0] + ':'));
+    var dd = el('dd');
+    if (f[0] === 'status') dd.appendChild(el('span', 'dot', '● '));
+    dd.appendChild(document.createTextNode(f[1]));
+    $('facts').appendChild(dd);
+  });
+
+  C.story.forEach(function (s) {
+    var li = el('li');
+    li.appendChild(el('span', 'year', s.year));
+    li.appendChild(el('span', 'head', s.title));
+    li.appendChild(el('p', null, s.text));
+    $('story-list').appendChild(li);
+  });
+
+  C.skills.forEach(function (g) {
+    var box = el('div', 'group');
+    box.appendChild(el('p', 'glabel', g.group));
+    var ul = el('ul', 'skills');
+    g.items.forEach(function (s) {
+      var li = el('li', null, s.name);
+      if (s.note) li.appendChild(el('small', null, s.note));
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+    $('skills-groups').appendChild(box);
+  });
+
+  var mark = { shipped: '[✓]', coming: '[~]', wip: '[ ]' };
+  C.apps.forEach(function (a) {
+    var li = el('li', 'app ' + a.status);
+    li.appendChild(el('span', 'chk', mark[a.status] || '[ ]'));
+    var box = el('div');
+    var name = el('span', 'name');
+    if (a.links && a.links.length) name.appendChild(link(a.name, a.links[0][1]));
+    else name.textContent = a.name;
+    box.appendChild(name);
+    if (a.label) box.appendChild(el('span', 'state', a.label));
+    box.appendChild(el('br'));
+    box.appendChild(el('span', 'desc', a.desc));
+    if (a.detail) {
+      var rows = typeof a.detail === 'string' ? [['how it works', a.detail]] : a.detail;
+      var dl = el('div', 'details');
+      rows.forEach(function (r) {
+        var p = el('p', 'detail');
+        p.appendChild(el('span', 'dl', r[0] + ': '));
+        p.appendChild(document.createTextNode(r[1]));
+        dl.appendChild(p);
+      });
+      box.appendChild(dl);
+    }
+    var meta = el('div', 'meta');
+    if (a.tags) meta.appendChild(el('span', 'tags', a.tags));
+    if (a.links && a.links.length) {
+      var ls = el('span', 'links');
+      a.links.forEach(function (l) { ls.appendChild(link(l[0], l[1])); });
+      meta.appendChild(ls);
+    }
+    box.appendChild(meta);
+    li.appendChild(box);
+    $('apps-list').appendChild(li);
+  });
+
+  C.contact.forEach(function (c) {
+    var li = el('li');
+    li.appendChild(el('span', null, c[0] + ':'));
+    li.appendChild(link(c[1], c[2]));
+    $('contact-list').appendChild(li);
+  });
+
+  // theme
+  var root = document.documentElement, saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (e) {}
+  function setTheme(t) {
+    root.setAttribute('data-theme', t);
+    document.querySelectorAll('.themes button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.theme === t ? 'true' : 'false');
+    });
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  }
+  if (saved) setTheme(saved);
+  document.querySelectorAll('.themes button').forEach(function (b) {
+    b.addEventListener('click', function () { setTheme(b.dataset.theme); });
+  });
+
+  // intro: type the command, then reveal the name
+  var typed = $('typed'), name = $('name'), cmd = 'whoami';
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { typed.textContent = cmd; }
+  else {
+    name.style.visibility = 'hidden';
+    var i = 0;
+    (function step() {
+      typed.textContent = cmd.slice(0, ++i);
+      if (i < cmd.length) setTimeout(step, 90);
+      else setTimeout(function () { name.style.visibility = 'visible'; }, 250);
+    })();
+  }
+
+  // active tab
+  var links = document.querySelectorAll('nav.tabs a');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) links.forEach(function (a) {
+          a.setAttribute('aria-current', a.getAttribute('href') === '#' + en.target.id ? 'true' : 'false');
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
