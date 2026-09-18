@@ -29,6 +29,10 @@ var CONTENT = {
   tagline:  "software project manager & indie iOS developer",
   updated:  "2026-09",
 
+  /* montako projektia näkyy avoimena; loput menevät
+     "More projects in development" -taitoksen alle */
+  visibleApps: 3,
+
   /* ---------- ABOUT: kappaleet, yksi per rivi ---------- */
   about: [
     "I lead software projects by day and ship iOS products on my own time. The common thread is ownership of the whole chain: from an unclear need to a written specification, to a working product, to people actually using it.",
@@ -108,10 +112,12 @@ var CONTENT = {
       name:   "Will·e",
       status: "shipped",
       label:  "",
-      desc:   "AI turns the student's own study material into practice questions. One of the most popular learning apps for grades 1–9 in Finland, now also in SE/US/UK/CA. Subscription business, built and run solo.",
+      desc:   "A study platform for grades 1–9 built around the student's own school material. It turns that material into personalised practice, an AI tutor that teaches at the child's grade level, social challenges, long-term progression and App Lock, where entertainment screen time is earned by studying. I trained the tutor to keep the conversation on learning: if a child steers it toward subjects that are harmful or inappropriate for their age, it declines calmly and guides them back to what they were studying — so the app is also a safe place for a child to learn how to use AI. One of the most popular learning apps for grades 1–9 in Finland, now also in SE/US/UK/CA. Founded, designed, built and run solo — product, iOS app, backend, subscriptions and international releases.",
       tags:   "swiftui supabase revenuecat gemini",
       detail: [
+        ["product",    "Three practice modes on the same material: a swipe-based true/false game, multiple choice and flashcards. Friend challenges with ranks and XP are free forever and act as the growth loop. A space journey turns answer streaks into progress through the solar system, with the mascot handing out planet facts. App Lock uses the Screen Time API so a child unlocks entertainment apps by studying first — the feature parents ask for. Plus an exam calendar, a weekly recap, and a chat tutor for the questions a quiz cannot answer."],
         ["scope",      "One person from first line of code to App Store: SwiftUI app with three system extensions, Supabase backend (Postgres, row-level security, Edge Functions, cron), RevenueCat subscriptions, APNs push and Live Activities, Screen Time API for the App Lock feature. Over a hundred sprints, each documented with what was measured and what was decided."],
+        ["pedagogy",   "Turning a photo into questions is the easy part; making the AI behave like a teacher is the work. Answers are tuned to the child's own age and grade level, so a third-grader and a ninth-grader asking the same question get different explanations. The tutor holds its ground on safety: attempts to move the conversation toward harmful or age-inappropriate subjects are declined calmly, with no alarm and no lecture, and the child is guided back to the material. Children will use AI regardless of what adults decide, so this is deliberately a place where they can learn to use it with the guardrails built in. Written, tested and iterated against real attempts rather than assumed."],
         ["security",   "Every user gets an anonymous auth identity and a JWT; Sign in with Apple is an optional link, not a requirement. Row-level security on every table. The AI proxy validates the session, enforces the subscription server-side and rate-limits per user. Found during review that a client-only paywall could be bypassed with curl, and closed it before launch."],
         ["economics",  "Measured token cost per generation instead of estimating it. The first real number was double the model; rewrote the prompts (cost halved, quality up), then moved generation to a cheaper model at roughly a tenth of the cost. Break-even moved from about 250 to about 2 500 generations per subscriber per month. Cost circuit breakers per user on the server."],
         ["compliance", "Built for children from day one: parental consent flow under GDPR-K, COPPA and PIPEDA, DPIA, privacy manifest, photos never stored on servers, chat history on-device only. Passed App Review after rejections on subscription disclosure and account deletion, each fixed in a day."],
@@ -272,6 +278,10 @@ var CONTENT = {
   .skills li::before { content: "- "; color: var(--dim); }
   .skills li small { color: var(--dim); display: block; padding-left: 2ch; font-size: 13px; }
 
+  .legend .k-shipped { color: var(--c1); }
+  .legend .k-coming  { color: var(--c4); }
+  .legend .k-wip     { color: var(--dim); }
+
   .apps { list-style: none; padding: 0; margin: 0; }
   .app { padding: 12px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 4ch 1fr; gap: 0 4px; }
   .app:last-child { border-bottom: 1px solid var(--line); }
@@ -283,8 +293,28 @@ var CONTENT = {
   .app .state { color: var(--c4); font-size: 13px; margin-left: 1ch; }
   .app .desc { color: var(--dim); }
   .app .desc::before { content: "// "; }
-  .app .details { margin: 8px 0 2px; }
-  .app .detail { margin: 0 0 6px; font-size: 13px; line-height: 1.55; max-width: 64ch; color: var(--fg); }
+  /* collapsible blocks */
+  .fold { margin: 10px 0 0; }
+  .fold > summary {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    list-style: none; cursor: pointer; color: var(--dim); font-size: 13px;
+    border-top: 1px solid var(--line); padding: 8px 0 0;
+  }
+  .fold > summary::-webkit-details-marker { display: none; }
+  .fold > summary:hover { color: var(--fg); }
+  .fold > summary .sign { color: var(--c1); }
+  .fold[open] > summary .sign { visibility: hidden; }
+  .fold[open] > summary .sign::after { content: "\2212"; visibility: visible; }
+  .fold > summary:focus-visible { outline: 1px solid var(--c2); outline-offset: 2px; }
+
+  .fold.more { margin-top: 18px; }
+  .fold.more > summary { border-top: 0; font-size: 14px; color: var(--c3); }
+  .fold.more > summary:hover { color: var(--fg); }
+  .fold.more .apps { margin-top: 4px; }
+  .fold.more .app:first-child { border-top: 1px solid var(--line); }
+
+  .app .details { margin: 10px 0 4px; }
+  .app .detail { margin: 0 0 8px; font-size: 13px; line-height: 1.55; max-width: 64ch; color: var(--fg); }
   .app .detail::before { content: "// "; color: var(--dim); }
   .app .detail .dl { color: var(--c4); }
   .app .meta { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 4px; font-size: 13px; }
@@ -351,8 +381,9 @@ var CONTENT = {
 
   <section id="apps">
     <h2>ls apps/</h2>
-    <p class="comment">// [✓] shipped &nbsp;[~] coming &nbsp;[ ] in progress</p>
+    <p class="comment legend">// <span class="k-shipped">[✓] shipped</span> &nbsp;<span class="k-coming">[~] coming</span> &nbsp;<span class="k-wip">[ ] in progress</span></p>
     <ul class="apps" id="apps-list"></ul>
+    <div id="apps-more"></div>
   </section>
 
   <section id="contact">
@@ -423,7 +454,8 @@ var CONTENT = {
   });
 
   var mark = { shipped: '[✓]', coming: '[~]', wip: '[ ]' };
-  C.apps.forEach(function (a) {
+
+  function buildApp(a) {
     var li = el('li', 'app ' + a.status);
     li.appendChild(el('span', 'chk', mark[a.status] || '[ ]'));
     var box = el('div');
@@ -434,17 +466,7 @@ var CONTENT = {
     if (a.label) box.appendChild(el('span', 'state', a.label));
     box.appendChild(el('br'));
     box.appendChild(el('span', 'desc', a.desc));
-    if (a.detail) {
-      var rows = typeof a.detail === 'string' ? [['how it works', a.detail]] : a.detail;
-      var dl = el('div', 'details');
-      rows.forEach(function (r) {
-        var p = el('p', 'detail');
-        p.appendChild(el('span', 'dl', r[0] + ': '));
-        p.appendChild(document.createTextNode(r[1]));
-        dl.appendChild(p);
-      });
-      box.appendChild(dl);
-    }
+
     var meta = el('div', 'meta');
     if (a.tags) meta.appendChild(el('span', 'tags', a.tags));
     if (a.links && a.links.length) {
@@ -453,9 +475,44 @@ var CONTENT = {
       meta.appendChild(ls);
     }
     box.appendChild(meta);
+
+    if (a.detail) {
+      var rows = typeof a.detail === 'string' ? [['how it works', a.detail]] : a.detail;
+      var d = el('details', 'fold');
+      var sum = el('summary');
+      sum.appendChild(el('span', null, 'inside the build'));
+      sum.appendChild(el('span', 'sign', '+'));
+      d.appendChild(sum);
+      var body = el('div', 'details');
+      rows.forEach(function (r) {
+        var pr = el('p', 'detail');
+        pr.appendChild(el('span', 'dl', r[0] + ': '));
+        pr.appendChild(document.createTextNode(r[1]));
+        body.appendChild(pr);
+      });
+      d.appendChild(body);
+      box.appendChild(d);
+    }
+
     li.appendChild(box);
-    $('apps-list').appendChild(li);
-  });
+    return li;
+  }
+
+  var visible = C.visibleApps || C.apps.length;
+  var shown = C.apps.slice(0, visible), rest = C.apps.slice(visible);
+  shown.forEach(function (a) { $('apps-list').appendChild(buildApp(a)); });
+
+  if (rest.length) {
+    var more = el('details', 'fold more');
+    var msum = el('summary');
+    msum.appendChild(el('span', null, 'more projects in development'));
+    msum.appendChild(el('span', 'sign', '+ ' + rest.length));
+    more.appendChild(msum);
+    var ul = el('ul', 'apps');
+    rest.forEach(function (a) { ul.appendChild(buildApp(a)); });
+    more.appendChild(ul);
+    $('apps-more').appendChild(more);
+  }
 
   C.contact.forEach(function (c) {
     var li = el('li');
